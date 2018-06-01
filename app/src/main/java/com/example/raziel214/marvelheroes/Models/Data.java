@@ -3,7 +3,7 @@ package com.example.raziel214.marvelheroes.Models;
 public class Data<T> {
 
     private int total;
-    private T result;
+    private T results;
 
     public int getTotal() {
         return total;
@@ -13,11 +13,11 @@ public class Data<T> {
         this.total = total;
     }
 
-    public T getResult() {
-        return result;
+    public T getResults() {
+        return results;
     }
 
-    public void setResult(T result) {
-        this.result = result;
+    public void setResults(T results) {
+        this.results = results;
     }
 }
