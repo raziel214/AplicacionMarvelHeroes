@@ -17,19 +17,23 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int AVENGERS_COMIC_ID=354;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
       //Call<Basic<Data<ArrayList<SuperHero>>>>
-        Call<Basic<Data<ArrayList<SuperHero>>>> superHeroesCall= MarvelService.getMarvelApi().getHeroes(354);
+
+        //Call<Basic<Data<ArrayList<SuperHero>>>> superHeroesCall= MarvelService.getMarvelApi().getHeroes(AVENGERS_COMIC_ID,"-name");
+        Call<Basic<Data<ArrayList<SuperHero>>>> superHeroesCall= MarvelService.getMarvelApi().getHeroes(AVENGERS_COMIC_ID);
 
         superHeroesCall.enqueue(new Callback<Basic<Data<ArrayList<SuperHero>>>>() {
             @Override
             public void onResponse(Call<Basic<Data<ArrayList<SuperHero>>>> call, Response<Basic<Data<ArrayList<SuperHero>>>> response) {
 
                 //Toast.makeText(MainActivity.this,"Hero name is :"+ response.body().getData().getResults().get(0).getName(),Toast.LENGTH_LONG).show();
-                Toast.makeText(MainActivity.this, "Hero name is :" + response.body().getData().getResults().get(1).getName()+" ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Hero name is :" + response.body().getData().getResults().get(0).getName()+" ", Toast.LENGTH_SHORT).show();
 
             }
 
