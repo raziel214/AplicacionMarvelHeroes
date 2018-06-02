@@ -21,14 +21,13 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String HERO_LIST_FRAGMENT="hero_lis_fragment";
-
-    private static final String TAG=MainActivity.class.getSimpleName();
     public static final int SUCCES_CODE = 200;
-
-    private FrameLayout frameLayout;
-
     public static final int AVENGERS_COMIC_ID=354;
+    private static final String HERO_LIST_FRAGMENT="hero_lis_fragment";
+    private static final String TAG=MainActivity.class.getSimpleName();
+    private FrameLayout frameLayout;
+    private ArrayList<SuperHero>superHeros;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +45,12 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Basic<Data<ArrayList<SuperHero>>>> call, Response<Basic<Data<ArrayList<SuperHero>>>> response) {
 
                 //Toast.makeText(MainActivity.this,"Hero name is :"+ response.body().getData().getResults().get(0).getName(),Toast.LENGTH_LONG).show();
-                Toast.makeText(MainActivity.this, "Hero name is :" + response.body().getData().getResults().get(0).getName()+" ", Toast.LENGTH_SHORT).show();
+
 
                 if (response.code()== SUCCES_CODE){
+
+                    superHeros=response.body().getData().getResults();
+                    Toast.makeText(MainActivity.this, "Hero name is :" + superHeros.get(0).getName()+" ", Toast.LENGTH_SHORT).show();
 
 
                     FragmentManager fragmentManager= getSupportFragmentManager();
