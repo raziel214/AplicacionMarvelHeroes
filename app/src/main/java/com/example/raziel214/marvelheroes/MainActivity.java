@@ -1,7 +1,10 @@
 package com.example.raziel214.marvelheroes;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.raziel214.marvelheroes.Api.MarvelService;
@@ -16,6 +19,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String HERO_LIST_FRAGMENT="hero_lis_fragment";
+
+    private FrameLayout frameLayout;
 
     public static final int AVENGERS_COMIC_ID=354;
 
@@ -44,5 +51,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+        frameLayout= (FrameLayout) findViewById(R.id.placeholder);
+
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+
+        HeroListFragment heroListFragment=new HeroListFragment();
+
+        fragmentTransaction.add(R.id.placeholder,heroListFragment, HERO_LIST_FRAGMENT);
+        fragmentTransaction.commit();
+
+
+
+
     }
 }
