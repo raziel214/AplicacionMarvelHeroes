@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int AVENGERS_COMIC_ID=354;
     private static final String HERO_LIST_FRAGMENT="hero_lis_fragment";
     private static final String TAG=MainActivity.class.getSimpleName();
+    public static final String HERO_LIST="hero_list";
     private FrameLayout frameLayout;
     private ArrayList<SuperHero>superHeros;
 
@@ -50,13 +51,18 @@ public class MainActivity extends AppCompatActivity {
                 if (response.code()== SUCCES_CODE){
 
                     superHeros=response.body().getData().getResults();
-                    Toast.makeText(MainActivity.this, "Hero name is :" + superHeros.get(0).getName()+" ", Toast.LENGTH_SHORT).show();
+
+                    /**Toast.makeText(MainActivity.this, "Hero name is :" + superHeros.get(0).getName()+" ", Toast.LENGTH_SHORT).show();*/
+
+                    Bundle bundle= new Bundle();
+                    bundle.putParcelableArrayList(HERO_LIST,superHeros);
 
 
                     FragmentManager fragmentManager= getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
 
                     HeroListFragment heroListFragment=new HeroListFragment();
+                    heroListFragment.setArguments(bundle);
 
                     fragmentTransaction.add(R.id.placeholder,heroListFragment, HERO_LIST_FRAGMENT);
                     fragmentTransaction.commit();
