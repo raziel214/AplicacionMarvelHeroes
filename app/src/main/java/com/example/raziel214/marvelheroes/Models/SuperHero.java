@@ -9,6 +9,8 @@ public class SuperHero implements Parcelable{
     private String name;
     private String description;
     private Thumbnail thumbnail;
+
+
     public SuperHero(){}
 
     protected SuperHero(Parcel in) {
@@ -56,6 +58,7 @@ public class SuperHero implements Parcelable{
     public Thumbnail getThumbnail() {
         return thumbnail;
     }
+
 
     public void setThumbnail(Thumbnail thumbnail) {
         this.thumbnail = thumbnail;

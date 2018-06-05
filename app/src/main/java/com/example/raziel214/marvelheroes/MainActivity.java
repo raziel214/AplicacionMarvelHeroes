@@ -55,16 +55,20 @@ public class MainActivity extends AppCompatActivity {
                     /**Toast.makeText(MainActivity.this, "Hero name is :" + superHeros.get(0).getName()+" ", Toast.LENGTH_SHORT).show();*/
 
                     Bundle bundle= new Bundle();
+
                     bundle.putParcelableArrayList(HERO_LIST,superHeros);
 
 
                     FragmentManager fragmentManager= getSupportFragmentManager();
+
                     FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
 
                     HeroListFragment heroListFragment=new HeroListFragment();
+
                     heroListFragment.setArguments(bundle);
 
                     fragmentTransaction.add(R.id.placeholder,heroListFragment, HERO_LIST_FRAGMENT);
+
                     fragmentTransaction.commit();
                 }
                 else{
