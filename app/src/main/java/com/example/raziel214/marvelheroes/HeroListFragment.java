@@ -2,8 +2,10 @@ package com.example.raziel214.marvelheroes;
 
 
 import android.annotation.SuppressLint;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,6 +25,8 @@ import static java.security.AccessController.getContext;
 public class HeroListFragment extends Fragment {
 
     private static final String TAG="No Data in the Superhero";
+    public static final String HERO_DETAIL_FRAGMENT = "HERO_DETAIL_FRAGMENT";
+    public static final String SUPER_HERO = "SUPER_HERO";
 
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
@@ -78,7 +82,7 @@ public class HeroListFragment extends Fragment {
             public void onHeroCliked(SuperHero superHero) {
                 //Cambiar  de Fragment a el HeroDetailFragment
 
-                goToHeroDetailFragment();
+                goToHeroDetailFragment(superHero);
                 
             }
         });
@@ -86,9 +90,25 @@ public class HeroListFragment extends Fragment {
         return view;
     }
 
-    private void goToHeroDetailFragment() {
+    private void goToHeroDetailFragment(SuperHero superHero) {
 
-        Toast.makeText(getContext(),"aqui estoy ",Toast.LENGTH_LONG).show();
+       // Toast.makeText(getContext(),"The hero clicked is: "+superHero.getName(),Toast.LENGTH_LONG).show();
+
+
+        HeroDetailFragment  heroDetailFragment= new HeroDetailFragment();
+
+        Bundle bundle=new Bundle();
+
+        bundle.putParcelable(SUPER_HERO,superHero);
+
+        heroDetailFragment.setArguments(bundle);
+
+        FragmentManager fragmentManager=getFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.placeholder,heroDetailFragment, HERO_DETAIL_FRAGMENT);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
 
     }
 
