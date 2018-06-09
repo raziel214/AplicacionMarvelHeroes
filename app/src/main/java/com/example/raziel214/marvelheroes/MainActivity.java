@@ -39,6 +39,21 @@ public class MainActivity extends AppCompatActivity {
       //Call<Basic<Data<ArrayList<SuperHero>>>>
 
         //Call<Basic<Data<ArrayList<SuperHero>>>> superHeroesCall= MarvelService.getMarvelApi().getHeroes(AVENGERS_COMIC_ID,"-name");
+        getHeroList();
+
+
+
+
+
+
+
+
+
+    }
+
+
+    private void getHeroList(){
+
         Call<Basic<Data<ArrayList<SuperHero>>>> superHeroesCall= MarvelService.getMarvelApi().getHeroes(AVENGERS_COMIC_ID);
 
         superHeroesCall.enqueue(new Callback<Basic<Data<ArrayList<SuperHero>>>>() {
@@ -61,15 +76,23 @@ public class MainActivity extends AppCompatActivity {
 
                     FragmentManager fragmentManager= getSupportFragmentManager();
 
-                    FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                    HeroListFragment savedFragment= (HeroListFragment) fragmentManager.findFragmentByTag(HERO_LIST_FRAGMENT);
 
-                    HeroListFragment heroListFragment=new HeroListFragment();
+                    if(savedFragment==null){
 
-                    heroListFragment.setArguments(bundle);
+                        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
 
-                    fragmentTransaction.add(R.id.placeholder,heroListFragment, HERO_LIST_FRAGMENT);
+                        HeroListFragment heroListFragment=new HeroListFragment();
 
-                    fragmentTransaction.commit();
+                        heroListFragment.setArguments(bundle);
+
+                        fragmentTransaction.add(R.id.placeholder,heroListFragment, HERO_LIST_FRAGMENT);
+
+                        fragmentTransaction.commit();
+
+                    }
+
+
                 }
                 else{
                     Log.d(TAG,"Error in request");
@@ -84,14 +107,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
-
 
 
     }
