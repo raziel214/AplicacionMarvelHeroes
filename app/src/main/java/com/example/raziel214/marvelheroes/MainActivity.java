@@ -1,10 +1,12 @@
 package com.example.raziel214.marvelheroes;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -49,6 +51,44 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+    }
+
+
+    public class GenericClass {
+
+        int a = 5;
+
+        int b = 8;
+
+
+
+        public GenericClass(int a, int b) {
+
+            this.a = a * 2;
+
+            this.b = b * 2;
+
+        }
+
+    }
+
+    public class CustomClass extends GenericClass {
+
+        final String TAG = "Questions";
+
+
+
+        public CustomClass() {
+
+            super(10, 20);
+
+
+
+            Log.d(TAG, String.format("A = %1$d, B = %2$d", a, b));
+
+        }
+
     }
 
 
@@ -76,6 +116,14 @@ public class MainActivity extends AppCompatActivity {
 
                     FragmentManager fragmentManager= getSupportFragmentManager();
 
+                    boolean is_tablet = getResources().getBoolean(R.bool.is_table);
+
+                    if(is_tablet){
+                        Toast.makeText(MainActivity.this, "es tablet", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(MainActivity.this, "es un telefono", Toast.LENGTH_SHORT).show();
+                    }
+
                     HeroListFragment savedFragment= (HeroListFragment) fragmentManager.findFragmentByTag(HERO_LIST_FRAGMENT);
 
                     if(savedFragment==null){
@@ -95,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else{
-                    Log.d(TAG,"Error in request");
+                    displayErrorMessage(getString(R.string.service_error_message));
                 }
 
             }
@@ -103,11 +151,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Basic<Data<ArrayList<SuperHero>>>> call, Throwable t) {
 
-                Toast.makeText(MainActivity.this,"Error in callBack:",Toast.LENGTH_LONG);
+                //Toast.makeText(MainActivity.this,"Error in callBack:",Toast.LENGTH_LONG);
+
+                displayErrorMessage(getString(R.string.network_error_message));
 
             }
         });
 
 
+    }
+
+    public void displayErrorMessage(String mensaje){
+        Snackbar snackbar= Snackbar.make(frameLayout,mensaje,Snackbar.LENGTH_INDEFINITE).
+                setAction(getString(R.string.ok), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getHeroList();
+                    }
+                });
+
+        snackbar.show();
     }
 }

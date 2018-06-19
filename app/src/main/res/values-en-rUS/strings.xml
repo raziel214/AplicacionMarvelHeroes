@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MarvelHeroes</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="copyright_marvel">Copyright Marvel</string>
+
+
+
+    <string name="service_error_message">Service Error,Try again</string>
+    <string name="network_error_message">Network Error,Try again</string>
+    <string name="No_information">No information abiable</string>
+    <string name="ok">OK</string>
+
+</resources>

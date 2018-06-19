@@ -52,7 +52,15 @@ public class HeroDetailFragment extends Fragment {
 
         heroNameTextView.setText(superHero.getName());
 
-        heroDescriptionTextView.setText(superHero.getDescription());
+        if(superHero.getDescription()!=null && !superHero.getDescription().isEmpty()){
+            heroDescriptionTextView.setText(superHero.getDescription());
+        }
+
+        else{
+            heroDescriptionTextView.setText(getString(R.string.No_information));
+        }
+
+
 
         Picasso.get().load(superHero.getThumbnail().getFullPathUrl()).into(heroPictureImageView);
 
