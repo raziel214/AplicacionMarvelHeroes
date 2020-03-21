@@ -50,26 +50,15 @@ public class HeroListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //Bundle bundle= getArguments();
-
-
-
-
-
         if(getArguments()!=null){
-
             superHeroes=getArguments().getParcelableArrayList(MainActivity.HERO_LIST);
-
         }
 
         /*else{
             Toast.makeText(getContext(),"The first super Hero is :"+superHeroes.get(0).getName(),Toast.LENGTH_LONG).show();
 
         }*/
-
-
-
     }
 
     @Override

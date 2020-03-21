@@ -55,41 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public class GenericClass {
 
-        int a = 5;
-
-        int b = 8;
-
-
-
-        public GenericClass(int a, int b) {
-
-            this.a = a * 2;
-
-            this.b = b * 2;
-
-        }
-
-    }
-
-    public class CustomClass extends GenericClass {
-
-        final String TAG = "Questions";
-
-
-
-        public CustomClass() {
-
-            super(10, 20);
-
-
-
-            Log.d(TAG, String.format("A = %1$d, B = %2$d", a, b));
-
-        }
-
-    }
 
 
     private void getHeroList(){
